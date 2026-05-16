@@ -78,7 +78,7 @@ export default function Contact({ id }: { id?: string }) {
           <h2 className="font-serif font-light text-[36px] lg:text-[56px] leading-tight tracking-[-0.01em] text-charcoal mb-[22px] lg:mb-8 text-balance">
             Pišite nam.
             <br />
-            <em className="italic">Odgovorimo</em> brzo.
+            <em className="italic">Odgovorićemo</em> brzo.
           </h2>
 
           {/* Aside — desktop only */}
@@ -99,7 +99,7 @@ export default function Contact({ id }: { id?: string }) {
               način — <em className="italic">WhatsApp</em>.
             </h3>
             <p className="font-sans text-[13px] lg:text-[15px] leading-[1.6] text-muted mb-6 text-pretty">
-              Opišite Vašu viziju, datum i broj djece — mi se pobrinemo za sve ostalo. Odgovaramo u roku od nekoliko sati.
+              Opišite Vašu viziju, datum i broj djece — pobrinućemo se za sve ostalo. Odgovorićemo u roku od nekoliko sati.
             </p>
 
             <div>

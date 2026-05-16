@@ -11,7 +11,7 @@ export const testimonials: Testimonial[] = [
     initial: 'A',
     name: 'Ana M.',
     meta: 'Rođendan · Podgorica',
-    body: 'Sve je bilo nestvarno — od trenutka kad su djeca ušla, do posljednje fotografije. Tim je razmislio o svemu i pre nego smo mi pitali.',
+    body: 'Sve je bilo nestvarno — od trenutka kad su djeca ušla, do posljednje fotografije. Tim je razmislio o svemu i prije nego smo mi pitali.',
   },
   {
     initial: 'J',
@@ -99,7 +99,7 @@ export const categories: Category[] = [
     label: 'Luxury Soft Play',
     numeral: 'I.',
     caption:
-      'Pastelne forme, mekani materijali, sigurni krajevi — studio krojen za naše najmlađe.',
+      'Pastelne forme, mekani materijali, sigurni krajevi — studio namijenjen našim najmlađima.',
     count: '120+ realizacija',
     tint: 'rgba(212, 165, 160, 0.32)',
     tint2: 'rgba(243, 220, 208, 0.42)',

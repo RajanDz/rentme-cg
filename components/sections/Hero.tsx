@@ -79,7 +79,7 @@ export default function Hero({ id }: { id?: string }) {
               background: 'linear-gradient(180deg, #e7cf9a 0%, #c9a35a 55%, #a8814a 100%)',
             }}
           >
-            Rezerviši termin
+            Rezervišite termin
             <span className="transition-transform group-active:translate-x-1">→</span>
           </button>
 

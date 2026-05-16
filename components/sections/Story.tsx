@@ -33,7 +33,7 @@ export default function Story() {
           <h2 className="font-serif font-light text-[32px] lg:text-[56px] leading-tight text-cream mb-5">
             Stvaramo trenutke
             <br />
-            koje se{' '}
+            koji se{' '}
             <em className="italic text-gold-light font-normal">pamte</em>
             <br />
             cijelog života.

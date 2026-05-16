@@ -7,22 +7,6 @@ const GRADIENT_WASH = [
   'linear-gradient(180deg, rgba(29,22,18,0.42) 0%, transparent 30%)',
 ].join(', ')
 
-function HeroScrollIndicator() {
-  return (
-    <div className="absolute bottom-8 lg:bottom-9 left-1/2 -translate-x-1/2 z-[3] flex flex-col items-center gap-2 pointer-events-none">
-      <span className="font-sans text-[9px] tracking-[0.32em] uppercase text-cream/70">
-        scroll
-      </span>
-      <div
-        className="relative w-px h-8 overflow-hidden"
-        style={{ background: 'linear-gradient(to bottom, rgba(251,246,241,0.4), transparent)' }}
-      >
-        <div className="absolute w-px h-2 bg-gold-light animate-scroll-pulse" />
-      </div>
-    </div>
-  )
-}
-
 export default function Hero({ id }: { id?: string }) {
   return (
     <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-end px-6 lg:px-12 pb-14 lg:pb-[72px]">
@@ -89,8 +73,7 @@ export default function Hero({ id }: { id?: string }) {
         </div>
       </div>
 
-      {/* 4 — Scroll indicator */}
-      <HeroScrollIndicator />
+
     </section>
   )
 }

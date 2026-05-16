@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Design tokens via Tailwind v4 @theme ─── */
+@theme {
+  /* Colors */
+  --color-pearl: #fefcf9;
+  --color-cream: #fbf6f1;
+  --color-ivory: #f4ece1;
+  --color-ivory-deep: #ece1d2;
+  --color-gold: #c9a35a;
+  --color-gold-deep: #a8814a;
+  --color-gold-light: #e7cf9a;
+  --color-gold-soft: #f3e3c1;
+  --color-blush: #d4a5a0;
+  --color-peach: #f3dcd0;
+  --color-ink: #1d1612;
+  --color-charcoal: #3a2e26;
+  --color-muted: #8a7868;
+
+  /* Typography */
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  /* Animations */
+  --animate-hero-pan: heroPan 24s ease-in-out infinite alternate;
+  --animate-hero-bokeh: heroBokeh 8s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-scroll-pulse: scrollPulse 1.8s linear infinite;
+  --animate-story-glow: storyGlow 4s ease-in-out infinite alternate;
+  --animate-footer-glow: footerGlow 3.6s ease-in-out infinite;
+  --animate-fab-ring: fabRing 2.4s ease-out infinite;
+  --animate-hero-rise: heroRise 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade-in: fadeIn 400ms ease-out both;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Keyframes ─── */
+@keyframes heroPan {
+  from { transform: scale(1.08) translate(0%, 0%); }
+  to   { transform: scale(1.08) translate(-2%, -1%); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes heroBokeh {
+  from { opacity: 0.45; transform: scale(1) translateY(0); }
+  to   { opacity: 0.7;  transform: scale(1.1) translateY(-6px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+@keyframes scrollPulse {
+  from { top: -8px; }
+  to   { top: 32px; }
+}
+
+@keyframes storyGlow {
+  0%   { transform: none; opacity: 0.75; }
+  100% { transform: translate(-6%, 8%) scale(1.15); opacity: 1; }
+}
+
+@keyframes footerGlow {
+  0%, 100% { opacity: 0.35; width: 16px; }
+  50%       { opacity: 0.9;  width: 32px; }
+}
+
+@keyframes fabRing {
+  0%   { transform: scale(0.96); opacity: 0.6; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Opacity-only version used under prefers-reduced-motion */
+@keyframes fadeInOpacity {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Story blob helpers ─────────────────────────────────────────────────────
+   Using CSS classes instead of inline animation so reduced-motion can override.
+*/
+.story-blob-fwd {
+  animation: storyGlow 14s ease-in-out infinite alternate;
+}
+.story-blob-rev {
+  animation: storyGlow 18s ease-in-out infinite alternate-reverse;
+}
+
+/* ─── Base layer ─── */
+@layer base {
+  body {
+    @apply font-sans bg-cream text-ink antialiased;
+  }
+
+  /* Grain texture overlay — fixed, pointer-events-none */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Utilities ─── */
+@layer utilities {
+  .text-balance  { text-wrap: balance; }
+  .text-pretty   { text-wrap: pretty; }
+
+  .section-eyebrow {
+    @apply font-sans text-[9px] font-medium uppercase tracking-[0.34em] text-gold-deep block mb-6;
+  }
+
+  /* Hide scrollbar cross-browser */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+
+  /* Skip-to-content link — visible only when focused */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[99999] focus:bg-cream focus:text-ink focus:px-4 focus:py-2 focus:rounded focus:font-sans focus:text-sm focus:shadow-md;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  /* Decorative looping animations — fully disable */
+  .animate-shimmer,
+  .animate-hero-pan,
+  .animate-hero-bokeh,
+  .animate-scroll-pulse,
+  .animate-story-glow,
+  .animate-footer-glow,
+  .animate-fab-ring,
+  .story-blob-fwd,
+  .story-blob-rev {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  /* Category panel cross-fade: keep opacity, drop the translate */
+  .animate-fade-in {
+    animation: fadeInOpacity 400ms ease-out both !important;
+  }
 }

@@ -7,8 +7,8 @@ export default function Intro() {
       {/* Gold hairline — top of section */}
       <div className="absolute top-0 left-6 lg:left-12 w-px h-8 bg-gradient-to-b from-gold to-transparent" />
 
-      <div className="pt-[100px] pb-20 lg:py-[180px] lg:pb-[160px] px-6 lg:px-12 max-w-screen-xl mx-auto">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-20 lg:items-start">
+      <div className="pt-[72px] pb-14 lg:py-[110px] px-6 lg:px-12 max-w-screen-xl mx-auto">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-14 lg:items-start">
 
           {/* Left col: eyebrow + gold rule + meta */}
           <div className="lg:col-span-4">

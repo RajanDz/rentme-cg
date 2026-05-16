@@ -25,7 +25,7 @@ function HeroScrollIndicator() {
 
 export default function Hero({ id }: { id?: string }) {
   return (
-    <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-end px-6 lg:px-12 pb-20 lg:pb-[100px]">
+    <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-end px-6 lg:px-12 pb-14 lg:pb-[72px]">
       {/* 1 — Background media */}
       <HeroMedia mobile={heroMediaMobile} desktop={heroMediaDesktop} />
 

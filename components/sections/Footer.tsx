@@ -27,9 +27,9 @@ function WhatsAppIcon() {
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream/70 pt-[90px] pb-[110px] lg:pt-[100px] lg:pb-14 px-6 lg:px-12 relative overflow-hidden text-center lg:text-left">
+    <footer className="bg-ink text-cream/70 pt-16 pb-16 lg:pt-[72px] lg:pb-12 px-6 lg:px-12 relative overflow-hidden text-center lg:text-left">
       {/* Animated gold glow — always centered */}
-      <div className="flex justify-center mb-9">
+      <div className="flex justify-center mb-6">
         <div
           className="h-[3px] rounded-full bg-gold-light animate-footer-glow motion-reduce:animate-none"
           style={{ width: 16 }}
@@ -38,7 +38,7 @@ export default function Footer() {
 
       {/* Mobile layout — stacked centered */}
       <div className="lg:hidden">
-        <p className="font-serif italic font-light text-[22px] leading-[1.3] max-w-[280px] mx-auto mb-9 text-cream/80">
+        <p className="font-serif italic font-light text-[22px] leading-[1.3] max-w-[280px] mx-auto mb-6 text-cream/80">
           Stvaramo trenutke koje
           <br />
           <em className="italic text-gold-light not-italic">
@@ -50,13 +50,13 @@ export default function Footer() {
         <p className="font-serif font-medium text-[26px] text-cream leading-none mb-1.5">
           rentme<span className="text-gold-light">.</span>cg
         </p>
-        <p className="font-sans text-[9px] uppercase tracking-[0.32em] text-gold-light/70 mb-9">
+        <p className="font-sans text-[9px] uppercase tracking-[0.32em] text-gold-light/70 mb-6">
           Camaj Company L &amp; N
         </p>
 
-        <div className="w-7 h-px mx-auto mb-9" style={{ background: 'rgba(201,163,90,0.5)' }} />
+        <div className="w-7 h-px mx-auto mb-6" style={{ background: 'rgba(201,163,90,0.5)' }} />
 
-        <div className="flex justify-center gap-4 mb-9">
+        <div className="flex justify-center gap-4 mb-6">
           <a href={config.instagramLink()} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
             className="w-[42px] h-[42px] rounded-full border border-gold-light/22 text-gold-light flex items-center justify-center">
             <IgIcon />
@@ -75,7 +75,7 @@ export default function Footer() {
 
         {/* Brand col */}
         <div>
-          <p className="font-serif italic font-light text-[26px] leading-[1.3] max-w-xs mb-9 text-cream/80">
+          <p className="font-serif italic font-light text-[26px] leading-[1.3] max-w-xs mb-6 text-cream/80">
             Stvaramo trenutke koje
             <br />
             <em className="italic text-gold-light not-italic">

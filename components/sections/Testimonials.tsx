@@ -33,7 +33,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="bg-cream py-20 lg:py-[160px]">
+    <section className="bg-cream py-14 lg:py-[100px]">
       {/* Heading */}
       <div className="px-6 lg:px-12 mb-7 max-w-screen-xl mx-auto">
         <span className="section-eyebrow">Iskustva porodica</span>

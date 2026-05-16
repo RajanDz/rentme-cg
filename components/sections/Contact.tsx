@@ -68,9 +68,9 @@ export default function Contact({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="bg-gradient-to-b from-cream to-ivory py-20 lg:py-[160px] pb-[100px] lg:pb-[160px] px-6 lg:px-12 relative"
+      className="bg-gradient-to-b from-cream to-ivory py-14 lg:py-[100px] px-6 lg:px-12 relative"
     >
-      <div className="max-w-screen-xl mx-auto lg:grid lg:grid-cols-12 lg:gap-20 lg:items-start">
+      <div className="max-w-screen-xl mx-auto lg:grid lg:grid-cols-12 lg:gap-14 lg:items-start">
 
         {/* Left col: heading + aside — col-span-5 */}
         <div className="lg:col-span-5">

@@ -280,7 +280,7 @@ export default function Categories() {
   }, [activeCat])
 
   return (
-    <section className="relative isolate py-20 lg:py-[160px] bg-cream overflow-hidden">
+    <section className="relative isolate py-14 lg:py-[100px] bg-cream overflow-hidden">
       {/* Ambient tinted blobs */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
         <div
@@ -295,7 +295,7 @@ export default function Categories() {
 
       <div className="relative z-10 max-w-screen-xl mx-auto">
         {/* Section head */}
-        <div className="px-6 lg:px-10 mb-10">
+        <div className="px-6 lg:px-10 mb-7">
           <span className="section-eyebrow">Naši koncepti</span>
           <h2 className="font-serif font-light text-[36px] lg:text-[64px] xl:text-[72px] leading-[1.1] tracking-[-0.01em] text-charcoal mb-4 text-balance">
             Tri svijeta. <em className="italic">Jedan</em>

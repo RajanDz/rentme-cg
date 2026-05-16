@@ -9,7 +9,7 @@ const storyStats = [
 
 export default function Story() {
   return (
-    <section className="bg-ink text-cream relative overflow-hidden py-[90px] lg:py-[160px] px-6 lg:px-12">
+    <section className="bg-ink text-cream relative overflow-hidden py-16 lg:py-[100px] px-6 lg:px-12">
       {/* Glow blobs */}
       <div
         aria-hidden
@@ -22,7 +22,7 @@ export default function Story() {
         style={{ background: 'radial-gradient(circle, rgba(212,165,160,0.18), transparent 65%)' }}
       />
 
-      <div className="relative z-10 max-w-screen-xl mx-auto lg:grid lg:grid-cols-12 lg:gap-20 lg:items-start">
+      <div className="relative z-10 max-w-screen-xl mx-auto lg:grid lg:grid-cols-12 lg:gap-14 lg:items-start">
 
         {/* Head — 4 cols on desktop */}
         <div className="lg:col-span-4">

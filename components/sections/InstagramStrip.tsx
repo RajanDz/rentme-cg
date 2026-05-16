@@ -43,7 +43,7 @@ function IgSlot({ src, alt, i }: { src: Slot; alt: string; i: number }) {
 
 export default function InstagramStrip() {
   return (
-    <section id="trenuci" className="bg-cream pt-[60px] pb-[90px] lg:py-[160px]">
+    <section id="trenuci" className="bg-cream pt-12 pb-16 lg:py-[100px]">
       {/* Header */}
       <div className="px-6 lg:px-12 mb-6 flex items-end justify-between gap-4 max-w-screen-xl mx-auto">
         <div>

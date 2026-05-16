@@ -38,11 +38,17 @@ export default function HeroMedia({ mobile, desktop }: HeroMediaProps) {
   const hasDesktop = desktop !== undefined
 
   // Oba postoje — swap po breakpointu
+  // Wrapper divovi nose display klase (ne SlotEl) jer Next.js Image fill
+  // postavlja display:block inline stilom koji bi pobijedio Tailwind klase.
   if (hasMobile && hasDesktop) {
     return (
       <div className="absolute inset-0 z-[1]">
-        <SlotEl slot={mobile} className="lg:hidden" />
-        <SlotEl slot={desktop} className="hidden lg:block" />
+        <div className="absolute inset-0 lg:hidden">
+          <SlotEl slot={mobile} className="" />
+        </div>
+        <div className="absolute inset-0 hidden lg:block">
+          <SlotEl slot={desktop} className="" />
+        </div>
       </div>
     )
   }

@@ -71,7 +71,7 @@ export const igMoments: IgMoment[] = [
 //   export const heroMediaDesktop: Slot = '/images/hero/desktop.jpg'
 //   export const heroMediaMobile: Slot = { video: '/images/hero/mobile.mp4' }
 export const heroMediaMobile: Slot | undefined = '/images/hero/primary-bg-phone.jpg'
-export const heroMediaDesktop: Slot | undefined = '/images/hero/bg.jpg'
+export const heroMediaDesktop: Slot | undefined = '/images/hero/bg-desktop.jpg'
 
 export type CategoryKey = 'soft' | 'bubble' | 'sweet'
 

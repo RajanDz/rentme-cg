@@ -12,7 +12,7 @@ function SlotEl({ slot, className }: { slot: Slot; className: string }) {
         muted
         loop
         playsInline
-        className={`absolute inset-0 w-full h-full object-cover ${className}`}
+        className={`absolute inset-0 w-full h-full object-cover pointer-events-none touch-pan-y ${className}`}
       />
     )
   }
@@ -22,7 +22,7 @@ function SlotEl({ slot, className }: { slot: Slot; className: string }) {
       alt=""
       fill
       priority
-      className={`object-cover ${className}`}
+      className={`object-cover pointer-events-none touch-pan-y ${className}`}
       sizes="100vw"
     />
   )

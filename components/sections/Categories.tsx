@@ -129,8 +129,6 @@ function CategoryTabs({ active, onChange }: TabsProps) {
 }
 
 // ─── CatImg ────────────────────────────────────────────────────────────────────
-// slot = string → <Image>, { video } → <video>, undefined → placeholder.
-// hoverZoom adds a subtle scale on hover to the inner media element.
 
 function CatImg({
   slot,
@@ -172,8 +170,9 @@ function CatImg({
           muted
           loop
           playsInline
+          preload="metadata"
           aria-label={alt}
-          className={`absolute inset-0 w-full h-full object-cover ${zoomClass}`}
+          className={`absolute inset-0 w-full h-full object-cover touch-pan-y ${zoomClass}`}
         />
       </div>
     )
@@ -185,7 +184,7 @@ function CatImg({
         src={slot}
         alt={alt}
         fill
-        className={`object-cover ${zoomClass}`}
+        className={`object-cover touch-pan-y ${zoomClass}`}
         sizes={sizes ?? '(max-width: 768px) 100vw, 600px'}
       />
     </div>
@@ -193,17 +192,10 @@ function CatImg({
 }
 
 // ─── CategoryPanel ─────────────────────────────────────────────────────────────
-//
-// Mobile:  hero → caption → [detail|moment] → wide  (flex-col)
-// Desktop: 6-col editorial grid
-//   col 1-4 row 1-2: hero (580px tall)
-//   col 5-6 row 1:   caption
-//   col 5-6 row 2:   detail + moment stacked (min-h 270px each)
-//   col 1-6 row 3:   wide (440px)
 
 function CategoryPanel({ cat }: { cat: Category }) {
   return (
-    <div className="px-6 lg:px-10 animate-fade-in" id="koncepti">
+    <div className="px-6 lg:px-10" id="koncepti">
       {/* Editorial grid */}
       <div className="flex flex-col gap-[14px] mb-[14px] lg:grid lg:grid-cols-6 lg:gap-3 lg:mb-3">
 
@@ -275,6 +267,17 @@ function CategoryPanel({ cat }: { cat: Category }) {
 export default function Categories() {
   const [activeCat, setActiveCat] = useState<CategoryKey>('soft')
   const active = categories.find((c) => c.key === activeCat)!
+  // Refs to each panel wrapper so we can retrigger the fade-in animation
+  // without unmounting (which would cause videos to reload from scratch).
+  const panelRefs = useRef<Record<string, HTMLDivElement | null>>({})
+
+  useEffect(() => {
+    const el = panelRefs.current[activeCat]
+    if (!el) return
+    el.classList.remove('animate-fade-in')
+    void el.offsetHeight // force reflow so browser registers the class removal
+    el.classList.add('animate-fade-in')
+  }, [activeCat])
 
   return (
     <section className="relative isolate py-20 lg:py-[160px] bg-cream overflow-hidden">
@@ -309,7 +312,8 @@ export default function Categories() {
           <CategoryTabs active={activeCat} onChange={setActiveCat} />
         </div>
 
-        {/* Tab panel */}
+        {/* Tab panels — all mounted simultaneously so videos stay loaded.
+            hidden keeps them out of layout/paint without unmounting. */}
         <div
           id={PANEL_ID}
           role="tabpanel"
@@ -317,7 +321,15 @@ export default function Categories() {
           tabIndex={0}
           className="outline-none"
         >
-          <CategoryPanel key={activeCat} cat={active} />
+          {categories.map((cat) => (
+            <div
+              key={cat.key}
+              ref={(el) => { panelRefs.current[cat.key] = el }}
+              hidden={cat.key !== activeCat}
+            >
+              <CategoryPanel cat={cat} />
+            </div>
+          ))}
         </div>
       </div>
     </section>

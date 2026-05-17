@@ -20,7 +20,7 @@ export default function Hero({ id }: { id?: string }) {
       />
 
       {/* 3 — Content block */}
-      <div className="relative z-[3] flex flex-col gap-[22px] lg:max-w-[1280px] lg:mx-auto lg:w-full lg:pr-[35%] lg:gap-[30px]">
+      <div className="relative z-[3] flex flex-col gap-[22px] lg:max-w-[1280px] lg:w-full lg:gap-[30px]">
         {/* Eyebrow */}
         <div
           className="flex items-center gap-3 animate-hero-rise"

@@ -28,7 +28,7 @@ export default function Hero({ id }: { id?: string }) {
         >
           <span className="w-7 h-px bg-gold-light shrink-0" />
           <p className="font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-gold-light">
-            rentme.cg · Premium Kids Events
+            rentme.cg · Premium kids events
           </p>
         </div>
 
@@ -37,11 +37,11 @@ export default function Hero({ id }: { id?: string }) {
           className="font-serif font-light text-[48px] lg:text-[96px] xl:text-[112px] leading-none lg:leading-[0.94] tracking-[-0.015em] lg:tracking-[-0.025em] text-cream animate-hero-rise text-balance"
           style={{ animationDelay: '120ms' }}
         >
-          Luxury Kids Eventi
+          Luxury kids eventi
           <br />
           &amp;{' '}
-          <em className="italic text-gold-light font-normal">Soft Play</em>{' '}
-          Iskustva
+          <em className="italic text-gold-light font-normal">soft play</em>{' '}
+          iskustva
         </h1>
 
         {/* Sub */}

@@ -9,16 +9,16 @@ interface NavLink  { label: string; href: string; num: string; sub?: SubLink[] }
 const NAV_LINKS: NavLink[] = [
   { num: '01', label: 'Galerija',           href: '#galerija' },
   { num: '02', label: 'Koncepti',           href: '#koncepti', sub: [
-    { label: 'Soft Play',           href: '#soft-play' },
-    { label: 'Električni Karuseli', href: '#karuseli' },
-    { label: 'Stolovi & Stolice',   href: '#stolovi' },
-    { label: 'Luxury Setups',       href: '#luxury-setups' },
-    { label: 'Play Zones',          href: '#play-zones' },
+    { label: 'Soft play',           href: '#soft-play' },
+    { label: 'Električni karuseli', href: '#karuseli' },
+    { label: 'Stolovi & stolice',   href: '#stolovi' },
+    { label: 'Luxury setups',       href: '#luxury-setups' },
+    { label: 'Play zones',          href: '#play-zones' },
   ]},
   { num: '03', label: 'Bubble House',       href: '#bubble-house' },
   { num: '04', label: 'Dvorci',             href: '#dvorci' },
   { num: '05', label: 'LeoNi Sweet Corner', href: '#sweet-corner' },
-  { num: '06', label: 'Dodatna Oprema',     href: '#oprema' },
+  { num: '06', label: 'Dodatna oprema',     href: '#oprema' },
   { num: '07', label: 'Kontakt',            href: '#contact' },
 ]
 

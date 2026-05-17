@@ -96,7 +96,7 @@ export interface Category {
 export const categories: Category[] = [
   {
     key: 'soft',
-    label: 'Luxury Soft Play',
+    label: 'Luxury soft play',
     numeral: 'I.',
     caption:
       'Pastelne forme, mekani materijali, sigurni krajevi — studio namijenjen našim najmlađima.',
@@ -114,7 +114,7 @@ export const categories: Category[] = [
   },
   {
     key: 'bubble',
-    label: 'Bubble House',
+    label: 'Bubble house',
     numeral: 'II.',
     caption:
       'Transparentni mehurovi, igrivi oblici, nestvarni ugođaj — iskustvo koje djeca opisuju godinama poslije.',
@@ -132,7 +132,7 @@ export const categories: Category[] = [
   },
   {
     key: 'sweet',
-    label: 'Sweet Corner',
+    label: 'Sweet corner',
     numeral: 'III.',
     caption:
       'Handcrafted slatkiši, elegantna prezentacija, personalizovani detalji — slatki kutak koji krase svaki kadar.',

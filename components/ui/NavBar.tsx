@@ -106,15 +106,15 @@ export default function NavBar() {
             RENTME<span className={menuOpen ? 'text-gold' : 'text-gold-deep'}>.</span>CG
           </div>
           <p
-            className={`font-sans text-[8px] font-medium uppercase tracking-[0.16em] mt-[3px] transition-colors duration-300 ${
-              menuOpen ? 'text-cream/50' : scrolled ? 'text-muted' : 'text-cream/60'
+            className={`font-sans text-[10px] font-medium uppercase tracking-[0.16em] mt-[4px] transition-colors duration-300 ${
+              menuOpen ? 'text-cream/70' : scrolled ? 'text-charcoal' : 'text-cream/80'
             }`}
           >
             Luxury Kids Corner Brand
           </p>
           <p
-            className={`font-sans text-[7px] uppercase tracking-[0.14em] mt-[1px] transition-colors duration-300 ${
-              menuOpen ? 'text-cream/30' : scrolled ? 'text-muted/70' : 'text-cream/40'
+            className={`font-sans text-[9px] uppercase tracking-[0.14em] mt-[2px] transition-colors duration-300 ${
+              menuOpen ? 'text-cream/40' : scrolled ? 'text-muted' : 'text-cream/50'
             }`}
           >
             Camaj Company L&amp;N

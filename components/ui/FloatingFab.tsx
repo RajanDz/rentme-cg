@@ -13,6 +13,13 @@ function WhatsAppIcon() {
 
 export default function FloatingFab() {
   const [visible, setVisible] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handler = (e: Event) => setMenuOpen((e as CustomEvent<boolean>).detail)
+    window.addEventListener('nav-menu', handler)
+    return () => window.removeEventListener('nav-menu', handler)
+  }, [])
 
   useEffect(() => {
     const hero = document.querySelector('#hero')
@@ -38,7 +45,7 @@ export default function FloatingFab() {
         grid place-items-center shadow-[0_12px_28px_-10px_rgba(29,22,18,0.55)] transition-all duration-300
         motion-reduce:before:hidden
         before:content-[''] before:absolute before:inset-0 before:rounded-full before:border before:border-gold/35 before:animate-fab-ring
-        ${visible ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'}`}
+        ${visible && !menuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'}`}
     >
       {/* Hover label — desktop only, slides in from right */}
       <span

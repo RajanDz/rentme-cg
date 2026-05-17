@@ -13,6 +13,13 @@ function WhatsAppIcon() {
 
 export default function StickyWhatsApp() {
   const [visible, setVisible] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handler = (e: Event) => setMenuOpen((e as CustomEvent<boolean>).detail)
+    window.addEventListener('nav-menu', handler)
+    return () => window.removeEventListener('nav-menu', handler)
+  }, [])
 
   useEffect(() => {
     const hero = document.querySelector('#hero')
@@ -48,7 +55,7 @@ export default function StickyWhatsApp() {
       rel="noopener noreferrer"
       aria-label="Pišite na WhatsApp"
       className={`lg:hidden fixed left-3.5 right-3.5 bottom-3.5 z-50 bg-ink/90 backdrop-blur-md border border-gold-light/30 text-cream rounded-full pl-[22px] pr-3.5 py-3 flex items-center justify-between gap-4 shadow-[0_24px_40px_-20px_rgba(29,22,18,0.55)] transition-all duration-[480ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] ${
-        visible
+        visible && !menuOpen
           ? 'translate-y-0 opacity-100'
           : 'translate-y-[140%] opacity-0 pointer-events-none'
       }`}

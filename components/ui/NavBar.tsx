@@ -58,8 +58,9 @@ export default function NavBar() {
     return () => document.removeEventListener('mousedown', handle)
   }, [dropOpen])
 
-  // Lock body scroll when mobile menu open
+  // Lock body scroll + notify floating elements when mobile menu open
   useEffect(() => {
+    window.dispatchEvent(new CustomEvent('nav-menu', { detail: menuOpen }))
     if (menuOpen) {
       const w = window.innerWidth - document.documentElement.clientWidth
       document.body.style.paddingRight = `${w}px`

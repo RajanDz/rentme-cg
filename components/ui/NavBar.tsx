@@ -76,8 +76,8 @@ export default function NavBar() {
 
   const close = () => { setMenuOpen(false); setSubOpen(false) }
 
-  const barColor  = menuOpen ? '#e7cf9a' : scrolled ? '#1d1612' : '#fbf6f1'
-  const bar2Color = scrolled && !menuOpen ? '#1d1612' : menuOpen ? '#e7cf9a' : '#fbf6f1'
+  const barColor  = menuOpen ? '#e7cf9a' : '#1d1612'
+  const bar2Color = menuOpen ? '#e7cf9a' : '#1d1612'
 
   const linkClass = (scrolled: boolean) =>
     `relative font-sans text-[10px] uppercase tracking-[0.15em] transition-colors duration-300
@@ -195,8 +195,8 @@ export default function NavBar() {
           onClick={() => setMenuOpen((o) => !o)}
           className="relative w-[38px] h-[38px] rounded-full border lg:hidden transition-colors duration-300"
           style={{
-            background: menuOpen ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.50)',
-            borderColor: menuOpen ? 'rgba(201,163,90,0.30)' : 'rgba(58,46,38,0.15)',
+            background: menuOpen ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg, rgba(231,207,154,0.55), rgba(201,163,90,0.40))',
+            borderColor: menuOpen ? 'rgba(201,163,90,0.30)' : 'rgba(201,163,90,0.60)',
           }}
         >
           <span className="absolute h-px transition-all duration-300"

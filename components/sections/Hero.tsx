@@ -9,7 +9,7 @@ const GRADIENT_WASH = [
 
 export default function Hero({ id }: { id?: string }) {
   return (
-    <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-end px-6 lg:px-12 pb-14 lg:pb-[72px]">
+    <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-center px-6 lg:px-12 pb-14 lg:pb-[72px]">
       {/* 1 — Background media */}
       <HeroMedia mobile={heroMediaMobile} desktop={heroMediaDesktop} />
 
@@ -47,7 +47,7 @@ export default function Hero({ id }: { id?: string }) {
           className="font-sans text-[14px] lg:text-[18px] leading-relaxed text-cream/[0.78] max-w-[320px] lg:max-w-[540px] text-pretty animate-hero-rise"
           style={{ animationDelay: '240ms' }}
         >
-          Kreiramo magična iskustva za Vaše najmlađe — od luksuznog soft play prostora do bubble house doživljaja koji djeca nikada neće zaboraviti.
+          Kreiramo magična iskustva za Vaše najmlađe —  <br /> od luksuznog soft play prostora do bubble house doživljaja koji djeca nikada neće zaboraviti.
         </p>
 
         {/* CTAs */}

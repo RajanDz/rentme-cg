@@ -39,9 +39,9 @@ export default function HomePage() {
         <Hero id="hero" />
         <Intro />
         <Categories />
+        <InstagramStrip />
         <Story />
         <Testimonials />
-        <InstagramStrip />
         <Contact id="contact" />
         <Footer />
         <StickyWhatsApp />

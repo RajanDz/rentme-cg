@@ -3,19 +3,34 @@
 import { useEffect, useRef, useState } from 'react'
 import { config } from '@/lib/config'
 
-const NAV_LINKS = [
-  { label: 'Studio',   href: '#studio' },
-  { label: 'Koncepti', href: '#koncepti' },
-  { label: 'Trenuci',  href: '#trenuci' },
-  { label: 'Kontakt',  href: '#contact' },
+interface SubLink { label: string; href: string }
+interface NavLink  { label: string; href: string; num: string; sub?: SubLink[] }
+
+const NAV_LINKS: NavLink[] = [
+  { num: '01', label: 'Galerija',           href: '#galerija' },
+  { num: '02', label: 'Koncepti',           href: '#koncepti', sub: [
+    { label: 'Soft Play',           href: '#soft-play' },
+    { label: 'Električni Karuseli', href: '#karuseli' },
+    { label: 'Stolovi & Stolice',   href: '#stolovi' },
+    { label: 'Luxury Setups',       href: '#luxury-setups' },
+    { label: 'Play Zones',          href: '#play-zones' },
+  ]},
+  { num: '03', label: 'Bubble House',       href: '#bubble-house' },
+  { num: '04', label: 'Dvorci',             href: '#dvorci' },
+  { num: '05', label: 'LeoNi Sweet Corner', href: '#sweet-corner' },
+  { num: '06', label: 'Dodatna Oprema',     href: '#oprema' },
+  { num: '07', label: 'Kontakt',            href: '#contact' },
 ]
 
 export default function NavBar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const rafRef = useRef<number | null>(null)
+  const [scrolled, setScrolled]         = useState(false)
+  const [menuOpen, setMenuOpen]         = useState(false)
+  const [subOpen, setSubOpen]           = useState(false)   // mobile accordion
+  const [dropOpen, setDropOpen]         = useState(false)   // desktop dropdown
+  const rafRef    = useRef<number | null>(null)
+  const dropRef   = useRef<HTMLDivElement>(null)
 
-  // rAF-throttled scroll — prevents re-render storm while scrolling
+  // rAF-throttled scroll
   useEffect(() => {
     const onScroll = () => {
       if (rafRef.current !== null) return
@@ -31,7 +46,19 @@ export default function NavBar() {
     }
   }, [])
 
-  // Lock body scroll; compensate scrollbar width to avoid layout shift
+  // Close desktop dropdown on outside click
+  useEffect(() => {
+    if (!dropOpen) return
+    const handle = (e: MouseEvent) => {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
+        setDropOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handle)
+    return () => document.removeEventListener('mousedown', handle)
+  }, [dropOpen])
+
+  // Lock body scroll when mobile menu open
   useEffect(() => {
     if (menuOpen) {
       const w = window.innerWidth - document.documentElement.clientWidth
@@ -47,29 +74,30 @@ export default function NavBar() {
     }
   }, [menuOpen])
 
-  const close = () => setMenuOpen(false)
+  const close = () => { setMenuOpen(false); setSubOpen(false) }
 
-  // Bar colours
-  const barColor = menuOpen ? '#e7cf9a' : scrolled ? '#1d1612' : '#fbf6f1'
+  const barColor  = menuOpen ? '#e7cf9a' : scrolled ? '#1d1612' : '#fbf6f1'
   const bar2Color = scrolled && !menuOpen ? '#1d1612' : menuOpen ? '#e7cf9a' : '#fbf6f1'
+
+  const linkClass = (scrolled: boolean) =>
+    `relative font-sans text-[10px] uppercase tracking-[0.15em] transition-colors duration-300
+     after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-[14px] after:origin-left
+     after:scale-x-0 motion-safe:hover:after:scale-x-100 after:transition-transform after:duration-[320ms]
+     after:bg-gold ${scrolled ? 'text-charcoal hover:text-ink' : 'text-cream/80 hover:text-cream'}`
 
   return (
     <>
-      {/* ── Top bar ─────────────────────────────────────────────────────── */}
-      {/*
-        will-change:transform promotes nav to its own GPU compositing layer,
-        eliminating the repaint jitter caused by backdrop-blur during scroll.
-      */}
+      {/* ── Top bar ──────────────────────────────────────────────────────── */}
       <nav
         style={{ willChange: 'transform' }}
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[22px] lg:px-12 py-[14px] transition-[background,border-color,backdrop-filter] duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[22px] lg:px-10 py-[14px] transition-[background,border-color,backdrop-filter] duration-300 ${
           scrolled && !menuOpen
             ? 'bg-cream/80 backdrop-blur-md saturate-150 border-b border-charcoal/15'
             : 'bg-transparent'
         }`}
       >
         {/* Logo */}
-        <div>
+        <div className="shrink-0">
           <div
             className={`font-serif text-[22px] leading-none transition-colors duration-300 ${
               menuOpen ? 'text-cream' : scrolled ? 'text-ink' : 'text-cream'
@@ -86,22 +114,60 @@ export default function NavBar() {
           </p>
         </div>
 
-        {/* Desktop inline nav */}
-        <div className="hidden lg:flex items-center gap-8" role="navigation" aria-label="Navigacija">
-          {NAV_LINKS.map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              className={`relative font-sans text-[12px] uppercase tracking-[0.18em] transition-colors duration-300
-                after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-[18px] after:origin-left
-                after:scale-x-0 motion-safe:hover:after:scale-x-100 after:transition-transform after:duration-[320ms]
-                after:bg-gold ${
-                scrolled ? 'text-charcoal hover:text-ink' : 'text-cream/80 hover:text-cream'
-              }`}
-            >
-              {label}
-            </a>
-          ))}
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-5 xl:gap-7" role="navigation" aria-label="Navigacija">
+          {NAV_LINKS.map((link) => {
+            if (link.sub) {
+              return (
+                <div key={link.label} className="relative" ref={dropRef}>
+                  <button
+                    onClick={() => setDropOpen((o) => !o)}
+                    aria-expanded={dropOpen}
+                    aria-haspopup="true"
+                    className={`${linkClass(scrolled)} flex items-center gap-1`}
+                  >
+                    {link.label}
+                    <svg
+                      width="8" height="8" viewBox="0 0 8 8" fill="none"
+                      className={`transition-transform duration-300 ${dropOpen ? 'rotate-180' : ''}`}
+                      style={{ opacity: 0.6 }}
+                    >
+                      <path d="M1 2.5L4 5.5L7 2.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                    </svg>
+                  </button>
+
+                  {/* Dropdown panel */}
+                  <div
+                    className={`absolute top-[calc(100%+16px)] left-1/2 -translate-x-1/2 w-[220px] rounded-md border border-gold/20 overflow-hidden transition-all duration-300 ${
+                      dropOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'
+                    }`}
+                    style={{ background: 'rgba(29,22,18,0.96)', backdropFilter: 'blur(12px)' }}
+                  >
+                    {/* Thin gold top accent */}
+                    <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #c9a35a, transparent)' }} />
+                    <div className="py-2">
+                      {link.sub.map((sub) => (
+                        <a
+                          key={sub.label}
+                          href={sub.href}
+                          onClick={() => setDropOpen(false)}
+                          className="flex items-center gap-3 px-5 py-[10px] font-sans text-[11px] uppercase tracking-[0.14em] text-cream/70 hover:text-gold-light hover:bg-white/[0.04] transition-colors duration-200"
+                        >
+                          <span className="w-px h-3 bg-gold/40 shrink-0" />
+                          {sub.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+            return (
+              <a key={link.label} href={link.href} className={linkClass(scrolled)}>
+                {link.label}
+              </a>
+            )
+          })}
         </div>
 
         {/* Desktop WhatsApp pill */}
@@ -109,13 +175,13 @@ export default function NavBar() {
           href={config.whatsappLink()}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden lg:flex items-center rounded-full px-4 py-[9px] font-sans text-[11px] uppercase tracking-[0.16em] text-ink font-medium motion-safe:hover:-translate-y-px motion-safe:hover:shadow-[0_4px_14px_rgba(201,163,90,0.35)] transition-all duration-200"
+          className="hidden lg:flex items-center rounded-full px-4 py-[9px] font-sans text-[11px] uppercase tracking-[0.16em] text-ink font-medium motion-safe:hover:-translate-y-px motion-safe:hover:shadow-[0_4px_14px_rgba(201,163,90,0.35)] transition-all duration-200 shrink-0"
           style={{ background: 'linear-gradient(135deg, var(--color-gold-light), var(--color-gold-deep))' }}
         >
           WhatsApp
         </a>
 
-        {/* Hamburger / Close — mobile only */}
+        {/* Hamburger — mobile only */}
         <button
           aria-label={menuOpen ? 'Zatvori meni' : 'Otvori meni'}
           aria-expanded={menuOpen}
@@ -126,50 +192,22 @@ export default function NavBar() {
             borderColor: menuOpen ? 'rgba(201,163,90,0.30)' : 'rgba(58,46,38,0.15)',
           }}
         >
-          {/*
-            All three bars use ONLY inline style transforms.
-            Never mix Tailwind translate utilities with inline transform —
-            they write to the same CSS property and one silently overrides the other.
-          */}
-
-          {/* Bar 1 — rotates to first arm of X */}
-          <span
-            className="absolute h-px transition-all duration-300"
-            style={{
-              width: 14,
-              left: '50%',
-              top: menuOpen ? 19 : 12,
+          <span className="absolute h-px transition-all duration-300"
+            style={{ width: 14, left: '50%', top: menuOpen ? 19 : 12,
               transform: menuOpen ? 'translateX(-50%) rotate(45deg)' : 'translateX(-50%)',
-              background: barColor,
-            }}
-          />
-          {/* Bar 2 — fades out */}
-          <span
-            className="absolute h-px transition-all duration-300"
-            style={{
-              width: 14,
-              left: '50%',
-              top: 19,
-              transform: 'translateX(-50%)',
-              opacity: menuOpen ? 0 : 1,
-              background: bar2Color,
-            }}
-          />
-          {/* Bar 3 — rotates to second arm of X */}
-          <span
-            className="absolute h-px transition-all duration-300"
-            style={{
-              width: menuOpen ? 14 : 9,
-              left: '50%',
-              top: menuOpen ? 19 : 26,
+              background: barColor }} />
+          <span className="absolute h-px transition-all duration-300"
+            style={{ width: 14, left: '50%', top: 19,
+              transform: 'translateX(-50%)', opacity: menuOpen ? 0 : 1,
+              background: bar2Color }} />
+          <span className="absolute h-px transition-all duration-300"
+            style={{ width: menuOpen ? 14 : 9, left: '50%', top: menuOpen ? 19 : 26,
               transform: menuOpen ? 'translateX(-50%) rotate(-45deg)' : 'translateX(-50%)',
-              background: barColor,
-            }}
-          />
+              background: barColor }} />
         </button>
       </nav>
 
-      {/* ── Mobile menu overlay ──────────────────────────────────────────── */}
+      {/* ── Mobile menu overlay ───────────────────────────────────────────── */}
       <div
         aria-hidden={!menuOpen}
         className={`fixed inset-0 z-40 bg-ink flex flex-col lg:hidden transition-all duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] ${
@@ -177,49 +215,104 @@ export default function NavBar() {
         }`}
       >
         {/* Ambient blobs */}
-        <div
-          className="absolute top-0 right-0 w-[70%] aspect-square rounded-full blur-[80px] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(201,163,90,0.12), transparent 65%)' }}
-        />
-        <div
-          className="absolute bottom-0 left-0 w-[55%] aspect-square rounded-full blur-[80px] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(212,165,160,0.10), transparent 65%)' }}
-        />
+        <div className="absolute top-0 right-0 w-[70%] aspect-square rounded-full blur-[80px] pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(201,163,90,0.12), transparent 65%)' }} />
+        <div className="absolute bottom-0 left-0 w-[55%] aspect-square rounded-full blur-[80px] pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(212,165,160,0.10), transparent 65%)' }} />
 
-        {/* Spacer — navbar height */}
+        {/* Spacer */}
         <div className="h-[62px] shrink-0" />
 
         {/* Nav links */}
-        <nav className="flex-1 flex flex-col justify-center px-8 gap-1" aria-label="Mobilna navigacija">
-          {NAV_LINKS.map(({ label, href }, i) => (
-            <a
-              key={label}
-              href={href}
-              onClick={close}
-              className="group flex items-baseline gap-4 py-3 border-b border-gold-light/10 last:border-b-0"
-              style={{
-                transition: 'opacity 350ms ease, transform 350ms ease',
-                transitionDelay: menuOpen ? `${i * 60 + 80}ms` : '0ms',
-                opacity: menuOpen ? 1 : 0,
-                transform: menuOpen ? 'translateX(0)' : 'translateX(-14px)',
-              }}
-            >
-              <span className="font-serif text-[10px] italic text-gold/50 w-5 shrink-0 group-hover:text-gold transition-colors duration-300">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span className="font-serif font-light text-[44px] leading-none text-cream/80 group-hover:text-cream group-hover:italic transition-all duration-300">
-                {label}
-              </span>
-            </a>
-          ))}
+        <nav className="flex-1 flex flex-col justify-center px-8 gap-0 overflow-y-auto" aria-label="Mobilna navigacija">
+          {NAV_LINKS.map((link, i) => {
+            const isKoncepti = !!link.sub
+            return (
+              <div key={link.label}>
+                {/* Main link row */}
+                <div
+                  className="flex items-baseline gap-4 border-b border-gold-light/10"
+                  style={{
+                    transition: 'opacity 350ms ease, transform 350ms ease',
+                    transitionDelay: menuOpen ? `${i * 50 + 80}ms` : '0ms',
+                    opacity: menuOpen ? 1 : 0,
+                    transform: menuOpen ? 'translateX(0)' : 'translateX(-14px)',
+                  }}
+                >
+                  {isKoncepti ? (
+                    <button
+                      onClick={() => setSubOpen((o) => !o)}
+                      className="group flex items-baseline gap-4 py-[10px] w-full text-left"
+                    >
+                      <span className="font-serif text-[10px] italic text-gold/50 w-5 shrink-0 group-hover:text-gold transition-colors duration-300">
+                        {link.num}
+                      </span>
+                      <span className="font-serif font-light text-[38px] leading-none text-cream/80 group-hover:text-cream group-hover:italic transition-all duration-300 flex-1">
+                        {link.label}
+                      </span>
+                      <svg
+                        width="14" height="14" viewBox="0 0 14 14" fill="none"
+                        className={`transition-transform duration-300 text-gold/50 mr-1 ${subOpen ? 'rotate-180' : ''}`}
+                      >
+                        <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+                      </svg>
+                    </button>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={close}
+                      className="group flex items-baseline gap-4 py-[10px] w-full"
+                    >
+                      <span className="font-serif text-[10px] italic text-gold/50 w-5 shrink-0 group-hover:text-gold transition-colors duration-300">
+                        {link.num}
+                      </span>
+                      <span className="font-serif font-light text-[38px] leading-none text-cream/80 group-hover:text-cream group-hover:italic transition-all duration-300">
+                        {link.label}
+                      </span>
+                    </a>
+                  )}
+                </div>
+
+                {/* Sub-links accordion */}
+                {isKoncepti && (
+                  <div
+                    className="overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                    style={{ maxHeight: subOpen ? `${link.sub!.length * 52}px` : '0px' }}
+                  >
+                    <div className="pl-9 pb-2 flex flex-col gap-0">
+                      {link.sub!.map((sub, si) => (
+                        <a
+                          key={sub.label}
+                          href={sub.href}
+                          onClick={close}
+                          className="flex items-center gap-3 py-[11px] border-b border-gold-light/8 last:border-b-0 group"
+                          style={{
+                            transition: 'opacity 250ms ease, transform 250ms ease',
+                            transitionDelay: subOpen ? `${si * 40}ms` : '0ms',
+                            opacity: subOpen ? 1 : 0,
+                            transform: subOpen ? 'translateX(0)' : 'translateX(-8px)',
+                          }}
+                        >
+                          <span className="w-px h-3 bg-gold/35 shrink-0" />
+                          <span className="font-sans text-[12px] uppercase tracking-[0.16em] text-cream/60 group-hover:text-gold-light transition-colors duration-200">
+                            {sub.label}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </nav>
 
-        {/* Bottom — WhatsApp CTA */}
+        {/* Bottom WhatsApp CTA */}
         <div
-          className="px-8 pb-14 pt-6 border-t border-gold-light/10"
+          className="px-8 pb-10 pt-5 border-t border-gold-light/10 shrink-0"
           style={{
             transition: 'opacity 350ms ease, transform 350ms ease',
-            transitionDelay: menuOpen ? '340ms' : '0ms',
+            transitionDelay: menuOpen ? '440ms' : '0ms',
             opacity: menuOpen ? 1 : 0,
             transform: menuOpen ? 'translateY(0)' : 'translateY(10px)',
           }}

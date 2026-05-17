@@ -27,13 +27,11 @@ export const metadata: Metadata = {
     title: 'rentme.cg — Luxury Kids Eventi',
     description:
       'Premium dječiji eventi u Crnoj Gori — Luxury Soft Play, Bubble House, Sweet Corner. 300+ realizovanih događaja.',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
     locale: 'sr_ME',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://rentme.cg',

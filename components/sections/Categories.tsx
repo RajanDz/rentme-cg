@@ -202,7 +202,7 @@ function CategoryPanel({ cat }: { cat: Category }) {
         {/* Hero — col-span-4, row-span-2 on desktop */}
         <CatImg
           slot={cat.hero}
-          alt={`${cat.label} hero`}
+          alt={`${cat.label} — postavljanje u Podgorici`}
           className="-mx-1 w-[calc(100%+8px)] h-[340px] lg:mx-0 lg:w-auto lg:col-span-4 lg:row-span-2 lg:h-[580px] motion-safe:lg:transition-transform motion-safe:lg:duration-700 motion-safe:lg:hover:-translate-y-0.5"
           tint={cat.tint}
           sizes="(max-width: 1024px) 100vw, 58vw"
@@ -222,7 +222,7 @@ function CategoryPanel({ cat }: { cat: Category }) {
         <div className="grid grid-cols-[1.4fr_1fr] gap-2 h-[200px] lg:col-span-2 lg:row-start-2 lg:grid-cols-1 lg:grid-rows-2 lg:gap-3 lg:h-auto">
           <CatImg
             slot={cat.detail}
-            alt={`${cat.label} detail`}
+            alt={`${cat.label} — detalj dekoracije`}
             className="h-full lg:min-h-[270px]"
             tint={cat.tint2}
             hoverZoom
@@ -230,7 +230,7 @@ function CategoryPanel({ cat }: { cat: Category }) {
           />
           <CatImg
             slot={cat.moment}
-            alt={`${cat.label} moment`}
+            alt={`${cat.label} — trenutak sa eventa`}
             className="h-full lg:min-h-[270px]"
             tint={cat.tint}
             hoverZoom
@@ -242,7 +242,7 @@ function CategoryPanel({ cat }: { cat: Category }) {
       {/* Wide — full width, col-span-6 on desktop */}
       <CatImg
         slot={cat.wide}
-        alt={`${cat.label} wide`}
+        alt={`${cat.label} — panorama prostora`}
         className="w-full h-[260px] mb-7 lg:h-[440px] lg:mb-3 motion-safe:lg:transition-transform motion-safe:lg:duration-700 motion-safe:lg:hover:-translate-y-0.5"
         tint={cat.tint2}
         sizes="(max-width: 1024px) 100vw, 90vw"

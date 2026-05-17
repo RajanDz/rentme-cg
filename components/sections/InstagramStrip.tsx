@@ -73,14 +73,14 @@ export default function InstagramStrip() {
               href={item.href ?? config.instagramLink()}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={isVideo ? 'Instagram Reel' : 'Instagram objava'}
+              aria-label={isVideo ? 'Pogledaj Instagram Reel — rentme.cg kids event' : 'Pogledaj Instagram objavu — rentme.cg kids event'}
               className="flex-[0_0_200px] h-[250px] lg:w-auto lg:h-[340px] relative snap-start rounded-sm overflow-hidden shrink-0
                 border border-charcoal/10
                 lg:flex-none [&:nth-child(even)]:lg:mt-12
                 motion-safe:lg:transition-transform motion-safe:lg:duration-[600ms] motion-safe:lg:hover:-translate-y-1.5
                 group"
             >
-              <IgSlot src={item.src} alt={isVideo ? 'Reel' : 'Objava'} i={i} />
+              <IgSlot src={item.src} alt={isVideo ? 'rentme.cg — video sa dječijeg eventa u Crnoj Gori' : 'rentme.cg — fotografija sa dječijeg eventa u Crnoj Gori'} i={i} />
               {isVideo && <PlayBadge />}
             </a>
           )

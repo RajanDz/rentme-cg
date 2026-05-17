@@ -34,7 +34,7 @@ export default function Hero({ id }: { id?: string }) {
 
         {/* H1 */}
         <h1
-          className="font-serif font-light text-[48px] lg:text-[96px] xl:text-[112px] leading-none lg:leading-[0.94] tracking-[-0.015em] lg:tracking-[-0.025em] text-cream animate-hero-rise text-balance"
+          className="font-serif font-light text-[36px] lg:text-[80px] xl:text-[96px] leading-[1.05] tracking-[-0.015em] lg:tracking-[-0.025em] text-cream animate-hero-rise whitespace-nowrap"
           style={{ animationDelay: '120ms' }}
         >
           Komplet proslava

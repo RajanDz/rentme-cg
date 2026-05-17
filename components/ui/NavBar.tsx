@@ -99,18 +99,25 @@ export default function NavBar() {
         {/* Logo */}
         <div className="shrink-0">
           <div
-            className={`font-serif text-[22px] leading-none transition-colors duration-300 ${
+            className={`font-serif text-[22px] uppercase leading-none tracking-[0.04em] transition-colors duration-300 ${
               menuOpen ? 'text-cream' : scrolled ? 'text-ink' : 'text-cream'
             }`}
           >
-            rentme<span className={menuOpen ? 'text-gold' : 'text-gold-deep'}>.</span>cg
+            RENTME<span className={menuOpen ? 'text-gold' : 'text-gold-deep'}>.</span>CG
           </div>
           <p
-            className={`font-sans text-[9px] font-medium uppercase tracking-[0.18em] mt-[3px] transition-colors duration-300 ${
+            className={`font-sans text-[8px] font-medium uppercase tracking-[0.16em] mt-[3px] transition-colors duration-300 ${
               menuOpen ? 'text-cream/50' : scrolled ? 'text-muted' : 'text-cream/60'
             }`}
           >
-            Camaj · L&amp;N
+            Luxury Kids Corner Brand
+          </p>
+          <p
+            className={`font-sans text-[7px] uppercase tracking-[0.14em] mt-[1px] transition-colors duration-300 ${
+              menuOpen ? 'text-cream/30' : scrolled ? 'text-muted/70' : 'text-cream/40'
+            }`}
+          >
+            Camaj Company L&amp;N
           </p>
         </div>
 

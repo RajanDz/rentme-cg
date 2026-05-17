@@ -9,7 +9,7 @@ const GRADIENT_WASH = [
 
 export default function Hero({ id }: { id?: string }) {
   return (
-    <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-center px-6 lg:px-12 pb-14 lg:pb-[72px]">
+    <section id={id} className="relative min-h-dvh w-full overflow-hidden flex flex-col justify-end lg:justify-center px-6 lg:px-12 pb-14 lg:pb-[72px]">
       {/* 1 — Background media */}
       <HeroMedia mobile={heroMediaMobile} desktop={heroMediaDesktop} />
 
